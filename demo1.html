@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>曲线运动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            position:absolute;
+            left:10px;
+            top:50%;
+            transform:translateY(-50%);
+            width:5px;
+            height: 5px;
+            background-color:#000;
+        }
+        .oldBox{
+            position:absolute;
+            width:5px;
+            height: 5px;
+            background-color:#000;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        var box=document.getElementById('box');
+        box.startX=box.offsetLeft;
+        box.startY=box.offsetTop;
+        box.startDeg=0;
+        setInterval(function(){
+            box.startDeg++;
+            box.style.left=box.startX+(box.startDeg*Math.PI/180)*100+'px';
+            box.style.top=box.startY-Math.sin(box.startDeg*Math.PI/180)*200+'px';
+
+            var box1=document.createElement('div');
+            box1.style.left=box.offsetLeft+'px';
+            box1.style.top=box.offsetTop+'px';
+            box1.className='oldBox';
+            document.body.appendChild(box1);
+        },16);
+    </script>
+</body>
+</html>

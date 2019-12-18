@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>气泡1</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height:100%;
+            background-color:#ddd
+        }
+        #myCanvas{
+            background-color: #fff;
+            position:absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="600"></canvas>
+<script>
+    var myCanvas=document.getElementById('myCanvas');
+    var paint=myCanvas.getContext('2d');
+    var arr=[];
+
+    //创建气泡
+    setInterval(function(){
+        var obj={};
+        obj.r=10;
+        obj.x=Math.floor(Math.random()*myCanvas.width);
+        obj.y=Math.floor(Math.random()*myCanvas.height);
+        obj.red=Math.floor(Math.random()*255);
+        obj.green=Math.floor(Math.random()*255);
+        obj.blue=Math.floor(Math.random()*255);
+        obj.a=Math.random();
+        arr.push(obj);
+    },16);
+    setInterval(function(){
+        paint.clearRect(0,0,myCanvas.width,myCanvas.height);
+        for (var i = 0; i <arr.length ; i++) {
+            var obj=arr[i];
+            paint.beginPath();
+            paint.arc(obj.x,obj.y,obj.r,0,2*Math.PI);
+            paint.fillStyle='rgba('+obj.red+','+obj.green+','+obj.blue+','+obj.a+')';
+            paint.fill();
+        }
+    },16)
+</script>
+</body>
+</html>
